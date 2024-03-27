@@ -141,27 +141,7 @@ exploratory: bool - If set to True, the LLM will evaluate the user's question an
 e.g. bamboo = BambooAI(df, debug=True, vector_db=True, search_tool=True, exploratory=True)
      bamboo = BambooAI(df,debug=False, vector_db=False, exploratory=True, search_tool=True)
 </code></pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="df: pd.DataFrame - Dataframe (It will try to source the data from internet, if 'df' is not provided)
-
-max_conversations: int - Number of &quot;user:assistant&quot; conversation pairs to keep in memory for a context. Default=2
-
-debug: bool - If True, the received code is sent back to the Language Learning Model (LLM) for an evaluation of its relevance to the user's question, along with code error checking and debugging.
-
-search_tool: bool - If True, the agent will switch to a google search if the answer is not available or satisfactory.
-
-vector_db: bool - If True, each answer will first be ranked from 1 to 10. If the rank surpasses a certain threshold (8), the corresponding question (vectorised), answer, code, and rank (metadata) are all stored in the Pinecone database. Each time a new question is asked, these records will be searched. If the similarity score is above 0.9, they will be offered as examples and included in the prompt (in a one-shot learning scenario)
-
-exploratory: bool - If set to True, the LLM will evaluate the user's question and select an &quot;Expert&quot; that is best suited to address the question (experts: Internet Search Specialist, Data Analisys Theoretician, Data Analyst). For instance, if the task involves code generation/execution, it will generate a task list detailing the steps, which will subsequently be sent to the LLM as a prompt for the next action. This method is particularly effective for vague user prompts, but it might not perform as efficiently with more specific prompts. The default setting is True.
-
-e.g. bamboo = BambooAI(df, debug=True, vector_db=True, search_tool=True, exploratory=True)
-     bamboo = BambooAI(df,debug=False, vector_db=False, exploratory=True, search_tool=True)" tabindex="0" role="button">
-      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
-    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
-</svg>
-      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
-    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
-</svg>
-    </clipboard-copy>
+    
   </div></div>
 <p dir="auto"><em><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">弃用通知（2023 年 10 月 25 日）：</font></font></strong></em>
 <em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">请注意，自 v 0.3.29 起，“llm”、“local_code_model”、“llm_switch_plan”和“llm_switch_code”参数已弃用。</font><font style="vertical-align: inherit;">现在通过 LLM_CONFIG 处理模型和模型参数给代理的分配。</font><font style="vertical-align: inherit;">这可以设置为环境变量或通过工作目录中的 LLM_CONFIG.json 文件设置。</font><font style="vertical-align: inherit;">请参阅下面的详细信息</font></font></em></p>
@@ -184,20 +164,7 @@ df = pd.read_csv('test_activity_data.csv')
 bamboo = BambooAI(df)
 bamboo.pd_agent_converse()
 </code></pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="# Run in a loop remembering the conversation history
-import pandas as pd
-from bambooai import BambooAI
-
-df = pd.read_csv('test_activity_data.csv')
-bamboo = BambooAI(df)
-bamboo.pd_agent_converse()" tabindex="0" role="button">
-      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
-    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
-</svg>
-      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
-    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
-</svg>
-    </clipboard-copy>
+   
   </div></div>
 <ul dir="auto">
 <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">用法示例：单次执行</font></font></li>
@@ -210,20 +177,7 @@ df = pd.read_csv('test_activity_data.csv')
 bamboo = BambooAI(df)
 bamboo.pd_agent_converse("Calculate 30, 50, 75 and 90 percentiles of the heart rate column")
 </code></pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="# Run programaticaly (Single execution).
-import pandas as pd
-from bambooai import BambooAI
-
-df = pd.read_csv('test_activity_data.csv')
-bamboo = BambooAI(df)
-bamboo.pd_agent_converse(&quot;Calculate 30, 50, 75 and 90 percentiles of the heart rate column&quot;)" tabindex="0" role="button">
-      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
-    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
-</svg>
-      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
-    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
-</svg>
-    </clipboard-copy>
+   
   </div></div>
 <p dir="auto"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">环境变量</font></font></strong></p>
 <p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">该库需要 OpenAI API 帐户和 API 密钥才能连接到 OpenAI LLM。</font><font style="vertical-align: inherit;">OpenAI API 密钥需要存储在</font></font><code>OPENAI_API_KEY</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">环境变量中。</font><font style="vertical-align: inherit;">密钥可以从这里获取： https: </font></font><a href="https://platform.openai.com/account/api-keys" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">//platform.openai.com/account/api-keys</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
@@ -248,19 +202,7 @@ pip install einops
 pip install xformers
 pip install bitsandbytes
 </code></pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118 (Adjust to match your CUDA version. This library is already included in Colab notebooks)
-pip install auto-gptq (Only required if using WizardCoder-15B-1.0-GPTQ model)
-pip install accelerate
-pip install einops
-pip install xformers
-pip install bitsandbytes" tabindex="0" role="button">
-      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
-    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
-</svg>
-      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
-    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
-</svg>
-    </clipboard-copy>
+    
   </div></div>
 <p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">本地模型的设置和参数位于 local_models.py 模块中，可以进行调整以匹配您的特定配置或首选项。</font></font></p>
 <p dir="auto"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">记录</font></font></strong></p>
@@ -313,52 +255,7 @@ pip install bitsandbytes" tabindex="0" role="button">
           |   └─ ... (Similar Fields)
           └─ ... (LLM 3, LLM 4, LLM 5 ...)
 </code></pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="- chain_id: 1695375585
-  ├─ chain_details (LLM Calls)
-  │   ├─ List of Dictionaries (Multiple Steps)
-  │       ├─ Call 1
-  │       │   ├─ agent (String)
-  │       │   ├─ chain_id (Integer)
-  │       │   ├─ timestamp (String)
-  │       │   ├─ model (String)
-  │       │   ├─ messages (List)
-  │       │   │   └─ role (String)
-  │       │   │   └─ content (String)
-  │       │   └─ Other Fields (content, prompt_tokens, completion_tokens, total_tokens, elapsed_time, tokens_per_second, cost)
-  │       ├─ Call 2
-  │       │   └─ ... (Similar Fields)
-  │       └─ ... (Call 3, Call 4, Call 5 ...)
-  │
-  ├─ chain_summary
-  │   ├─ Dictionary
-  │       ├─ Total LLM Calls (Integer)
-  │       ├─ Prompt Tokens (Integer)
-  │       ├─ Completion Tokens (Integer)
-  │       ├─ Total Tokens (Integer)
-  │       ├─ Total Time (Float)
-  │       ├─ Tokens per Second (Float)
-  │       ├─ Total Cost (Float)
-  │
-  ├─ summary_per_model
-      ├─ Dictionary
-          ├─ LLM 1 (Dictionary)
-          │   ├─ LLM Calls (Integer)
-          │   ├─ Prompt Tokens (Integer)
-          │   ├─ Completion Tokens (Integer)
-          │   ├─ Total Tokens (Integer)
-          │   ├─ Total Time (Float)
-          │   ├─ Tokens per Second (Float)
-          │   ├─ Total Cost (Float)
-          ├─ LLM 2
-          |   └─ ... (Similar Fields)
-          └─ ... (LLM 3, LLM 4, LLM 5 ...)" tabindex="0" role="button">
-      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
-    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
-</svg>
-      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
-    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
-</svg>
-    </clipboard-copy>
+    
   </div></div>
 <div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">例子</font></font></h2><a id="user-content-examples" class="anchor" aria-label="永久链接：示例" href="#examples"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
 <p dir="auto"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CLI 输出：使用机器学习预测核心温度</font></font></strong></p>
